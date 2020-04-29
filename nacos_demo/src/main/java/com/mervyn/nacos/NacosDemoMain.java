@@ -2,9 +2,11 @@ package com.mervyn.nacos;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
+import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
 public class NacosDemoMain {
     public static void main(String[] args) throws NacosException {
@@ -25,5 +27,24 @@ public class NacosDemoMain {
         ConfigService configService = NacosFactory.createConfigService(properties);
         String config = configService.getConfig(dataId, group, 5000);
         System.out.println(config);
+
+        //监听
+        configService.addListener(dataId, group, new Listener() {
+            public Executor getExecutor() {
+                return null;
+            }
+
+            public void receiveConfigInfo(String s) {
+                System.out.println(s);
+            }
+        });
+
+        while(true) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
