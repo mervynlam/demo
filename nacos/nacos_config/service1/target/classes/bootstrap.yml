@@ -1,0 +1,30 @@
+server:
+  port: 56010 #启动端口 命令行注入
+
+spring:
+  application:
+    name: service1
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 # 配置中心地址
+        file-extension: yaml # dataId = application.name + file-extension = service1.yaml 与nacos发布的配置相同
+        namespace: bfb75518-0f3d-47b1-b520-a27d21206013 # 命名空间 - 测试环境
+        group: TEST_GROUP # 测试组
+        shared-dataids: ext-config-common01.properties,ext-config-common02.properties,ext-config-common03.properties
+        refreshable-dataids: ext-config-common03.properties
+#        # config external configuration
+#        # 1、Data Id 在默认的组 DEFAULT_GROUP,不支持配置的动态刷新
+#        ext-config[0]:
+#          data-id: ext-config-common01.properties
+#
+#        # 2、Data Id 不在默认的组，不支持动态刷新
+#        ext-config[1]:
+#          data-id: ext-config-common02.properties
+#          group: GLOBALE_GROUP
+#
+#        # 3、Data Id 既不在默认的组，也支持动态刷新
+#        ext-config[2]:
+#          data-id: ext-config-common03.properties
+#          group: REFRESH_GROUP
+#          refresh: true
