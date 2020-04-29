@@ -1,0 +1,13 @@
+server:
+  port: 56020 #启动端口 命令行注入
+
+spring:
+  application:
+    name: service2
+  cloud:
+    nacos:
+      config:
+        server‐addr: 127.0.0.1:8848 # 配置中心地址
+        file‐extension: yaml # dataId = application.name + file-extension = service2.yaml 与nacos发布的配置相同
+        namespace: bfb75518-0f3d-47b1-b520-a27d21206013 # 命名空间 - 测试环境
+        group: TEST_GROUP # 测试组
