@@ -1,0 +1,14 @@
+server:
+  port: 56010
+
+spring:
+  application:
+    name: quickstart-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+logging:
+  level:
+    root: info
+    org.springframework: info
